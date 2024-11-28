@@ -10,6 +10,10 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
             usernameField : 'email'
         })
     }
+
+
+    
+
     validate (email:string,password:string) {
         this.authService.validateLocalUser(email,password)
     } 
