@@ -7,13 +7,6 @@ import {
 import { UserService } from 'src/user/user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { verify } from 'argon2';
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  role: string;
-}
 
 @Injectable()
 export class AuthService {
@@ -26,10 +19,12 @@ export class AuthService {
 
   async validateLocalUser(email: string, password: string) {
     const user = await this.userService.findByEmail(email);
+    
     if (!user) throw new UnauthorizedException('User not found!');
-    const isPasswordMatched = verify(user.password, password);
-    if (!isPasswordMatched)
-      throw new UnauthorizedException('Invalid Credentials!');
+    const isPasswordMatched = await verify(user.password, password);
+    console.log(isPasswordMatched)
+    if (!isPasswordMatched)throw new UnauthorizedException('Invalid Credentials!');
+      
 
     return { id: user.id, name: user.name};
   }

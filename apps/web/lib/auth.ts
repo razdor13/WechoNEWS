@@ -71,26 +71,28 @@ export async function signIn(
       body: JSON.stringify(validatedFields.data),
     }
   );
-
+  console.log(response)
   if (response.ok) {
     const result = await response.json();
-    // TODO: Create The Session For Authenticated User.
+    console.log({result})
+  //   // TODO: Create The Session For Authenticated User.
 
-    await createSession({
-      user: {
-        id: result.id,
-        name: result.name,
-        role: result.role,
-      },
-      accessToken: result.accessToken,
-      refreshToken: result.refreshToken,
-    });
-    redirect("/");
-  } else {
+  //   await createSession({
+  //     user: {
+  //       id: result.id,
+  //       name: result.name,
+  //       role: result.role,
+  //     },
+  //     accessToken: result.accessToken,
+  //     refreshToken: result.refreshToken,
+  //   });
+  //   redirect("/");
+  }
+  else {
     return {
       message:
         response.status === 401
-          ? "Invalid Credentials!"
+          ? "Invalid Credentialxxs!"
           : response.statusText,
     };
   }
