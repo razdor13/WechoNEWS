@@ -61,7 +61,6 @@ export async function signIn(
         },
         body: JSON.stringify(validatedFields.data),
     });
-    console.log(response);
     if (response.ok) {
         const result = await response.json();
       
