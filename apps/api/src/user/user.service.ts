@@ -28,4 +28,12 @@ constructor( private readonly prisma:PrismaService ) {
       }
     })
   }
+
+  async findOne(userId:number): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: {
+        id:userId
+      }
+    })
+  }
 }

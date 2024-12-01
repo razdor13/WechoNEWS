@@ -7,10 +7,11 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import jwtConfig from './config/jwt.config';
 import { ConfigModule } from '@nestjs/config';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [JwtModule.registerAsync(jwtConfig.asProvider()),ConfigModule.forFeature(jwtConfig)],
   controllers: [AuthController],
-  providers: [AuthService,UserService,PrismaService,LocalStrategy],
+  providers: [AuthService,UserService,PrismaService,LocalStrategy,JwtStrategy],
 })
 export class AuthModule {}
